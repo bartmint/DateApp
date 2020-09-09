@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using DateApp.Domain.Abstract;
+using DateApp.Infrastructure.Repositories;
 
 namespace DateApp.Domain
 {
@@ -13,7 +15,7 @@ namespace DateApp.Domain
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-
+            services.AddScoped<IAuthRepository, AuthRepository>();
             return services;
         }
     }

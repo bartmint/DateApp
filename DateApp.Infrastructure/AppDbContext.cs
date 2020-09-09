@@ -11,9 +11,11 @@ namespace DateApp.Infrastructure
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
         
         public DbSet<Value> Values { get; set; }
+        public DbSet<User> Users{ get; set; }
 
-        
-        
-        
+
+
+
+
     }
 }
