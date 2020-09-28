@@ -17,4 +17,8 @@
     <ProjectReference Include="..\DateApp.Infrastructure\DateApp.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\ViewModels\" />
+  </ItemGroup>
+
 </Project>

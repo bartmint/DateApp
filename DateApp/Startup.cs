@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DateApp.Domain;
 using DateApp.Infrastructure;
+using DateApp.UI.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,6 @@ namespace DateApp
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
@@ -34,21 +34,12 @@ namespace DateApp
                 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
-            services.AddInfrastructure();
+            services.AddDomain();
+            services.AddRepositories();
             services.AddRazorPages();
             services.AddControllers();
             services.AddCors();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
+            services.AddIdentityServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +60,7 @@ namespace DateApp
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x=>x.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200"));
             app.UseAuthentication();
             app.UseAuthorization();
             

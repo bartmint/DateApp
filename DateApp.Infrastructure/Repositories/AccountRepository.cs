@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace DateApp.Infrastructure.Repositories
 {
-    public class AuthRepository : IAuthRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly AppDbContext _ctx;
 
-        public AuthRepository(AppDbContext appDbContext)
+        public AccountRepository(AppDbContext appDbContext)
         {
             _ctx = appDbContext;
         }
-        public async Task<User> Login(string username, string password)
+        public async Task<AppUser> Login(string username, string password)
         {
             var user = await _ctx.Users.FirstOrDefaultAsync(u => u.Username == username);
 
@@ -43,13 +43,16 @@ namespace DateApp.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<User> Register(User user, string password)
+        public async Task<AppUser> Register(string username, string password)
         {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            var user = new AppUser
+            {
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
 
             await _ctx.Users.AddAsync(user);
             await _ctx.SaveChangesAsync();

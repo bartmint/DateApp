@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DateApp.Domain.Models
 {
-    public class User
+    public class AppUser
     {
         public int Id { get; set; }
         public string Username { get; set; }

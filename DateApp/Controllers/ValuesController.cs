@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
-    [Authorize]
     //http:localhost:5000/api/values to oznacza
     [Route("api/[controller]")]
     [ApiController]
@@ -23,14 +22,13 @@ namespace DatingApp.API.Controllers
         }
         // GET api/values
         [HttpGet]
-        public async Task<IActionResult>  Get()
+        public async Task<IActionResult> Get()
         {
             return Ok(await _ctx.Values.ToListAsync());
         }
-        [AllowAnonymous]
         // GET api/values/id
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             return Ok(await _ctx.Values.Where(p => p.Id == id).FirstOrDefaultAsync());
         }

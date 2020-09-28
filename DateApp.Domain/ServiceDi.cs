@@ -7,7 +7,7 @@ namespace DateApp.Domain
 {
     public static class ServiceDi
     {
-        public static IServiceCollection Domain(this IServiceCollection service)
+        public static IServiceCollection AddDomain(this IServiceCollection service)
         {
             return service;
         }

@@ -1,22 +1,19 @@
-﻿using DateApp.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using DateApp.Domain.Abstract;
+using DateApp.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using DateApp.Domain.Abstract;
-using DateApp.Infrastructure.Repositories;
 
-namespace DateApp.Domain
+namespace DateApp.Infrastructure
 {
     public static class ServiceDi
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddRepositories(this IServiceCollection service)
         {
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            return services;
+            service.AddScoped<IAccountRepository, AccountRepository>();
+            service.AddScoped<ITokenRepository, TokenRepository>();
+            return service;
         }
     }
 }

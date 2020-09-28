@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DateApp.Domain.Abstract
 {
-    public interface IAuthRepository
+    public interface IAccountRepository
     {
-        Task<User> Register(User user, string password);
-        Task<User> Login(string username, string password);
+        Task<AppUser> Register(string username, string password);
+        Task<AppUser> Login(string username, string password);
         Task<bool> UserExists(string username);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DateApp.UI.ViewModels
 {
-    public class UserForRegister
+    public class UserForRegisterDtO
     {
         [Required]
         [MinLength(5, ErrorMessage ="Min 5 letters")]
