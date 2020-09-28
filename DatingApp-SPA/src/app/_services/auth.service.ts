@@ -11,6 +11,8 @@ export class AccountService {
  baseUrl =  'http://localhost:5001/api/';
  private currentUserSource = new ReplaySubject<User>(1);
  currentUser$ = this.currentUserSource.asObservable();
+
+
 constructor(private http: HttpClient) { }
 
 
@@ -25,15 +27,25 @@ login(model: any) {
       }
     })
   );
+}
+register(model: any){
+  return this.http.post(this.baseUrl + 'account/register', model).pipe(
+    map((user: User) => {
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+      return user; // tylko do wyswietlenia w konsoli
+    })
+  );
+}
 
-}
-// tslint:disable-next-line: typedef
-setCurrentUser(user: User){
-  this.currentUserSource.next(user);
-}
 // tslint:disable-next-line: typedef
 logout(){
   localStorage.removeItem('user');
   this.currentUserSource.next(null);
+}
+
+setCurrentUser(user: User){
+  this.currentUserSource.next(user);
 }
 }

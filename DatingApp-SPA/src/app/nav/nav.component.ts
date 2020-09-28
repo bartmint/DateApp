@@ -8,14 +8,13 @@ import { AccountService } from '../_services/auth.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: any = {};
+  model: any={}; //inicjalizacja jako pusty objekt
   
 
   constructor(public accountSerivce: AccountService) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
-   
   }
   // tslint:disable-next-line: typedef
   login() {
@@ -31,6 +30,7 @@ export class NavComponent implements OnInit {
     this.accountSerivce.logout();
   
   }
+  
  // tslint:disable-next-line: typedef
 
  
