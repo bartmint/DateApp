@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DateApp.Domain.Models;
 using DateApp.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,16 +22,21 @@ namespace DatingApp.API.Controllers
             _ctx = appDbContext;
         }
         // GET api/values
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await _ctx.Values.ToListAsync());
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Get()
+        //{
+        //    return Ok(await _ctx.Values.ToListAsync());
+        //}
         // GET api/values/id
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await _ctx.Values.Where(p => p.Id == id).FirstOrDefaultAsync());
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _ctx.Users.ToListAsync());
         }
 
         // POST api/values

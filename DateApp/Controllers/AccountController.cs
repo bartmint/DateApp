@@ -57,11 +57,8 @@ namespace DateApp.UI.Controllers
             await _authRepository.Login(userDTO.Username, userForLogin.Password);
 
             return userDTO;
-
-
-
-
         }
+       
 
     }
 }

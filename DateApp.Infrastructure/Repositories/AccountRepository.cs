@@ -50,6 +50,7 @@ namespace DateApp.Infrastructure.Repositories
 
             var user = new AppUser
             {
+                Username=username,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
