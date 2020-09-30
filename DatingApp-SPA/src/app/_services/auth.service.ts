@@ -5,7 +5,8 @@ import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  // tslint:disable-next-line: max-line-length
+  providedIn: 'root' // serwis jest rejestrowany jako dostawca modulu, bez dodawania go do dostawcow w app.module.ts ngModules, dodawany jest do providers
 })
 export class AccountService {
  baseUrl =  'http://localhost:5001/api/';
@@ -19,8 +20,7 @@ constructor(private http: HttpClient) { }
 // tslint:disable-next-line: typedef
 login(model: any) {
   return this.http.post(this.baseUrl + 'account/login', model).pipe(
-    map((response: User) => {
-      const user = response;
+    map((user: User) => {
       if (user){
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSource.next(user);
@@ -28,6 +28,7 @@ login(model: any) {
     })
   );
 }
+// tslint:disable-next-line: typedef
 register(model: any){
   return this.http.post(this.baseUrl + 'account/register', model).pipe(
     map((user: User) => {
@@ -46,6 +47,7 @@ logout(){
   this.currentUserSource.next(null);
 }
 
+// tslint:disable-next-line: typedef
 setCurrentUser(user: User){
   this.currentUserSource.next(user);
 }
