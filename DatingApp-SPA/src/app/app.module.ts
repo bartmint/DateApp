@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
@@ -12,16 +12,21 @@ import { RegisterComponent } from './register/register.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing-modules';
-import {ToastrModule} from 'ngx-toastr';
 import { SharedModule } from './_modules/shared/shared.module';
+import { ErrorsInterceptor } from './_interceptors/errors.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @NgModule({
-  declarations: [						AppComponent,
+  declarations: [						
+      AppComponent,
       NavComponent,
       HomeComponent,
       RegisterComponent,
       ListsComponent,
-      MessagesComponent
+      MessagesComponent,
+      NotFoundComponent,
+      ServerErrorComponent
    ],
   imports: [
     BrowserModule,
@@ -32,6 +37,7 @@ import { SharedModule } from './_modules/shared/shared.module';
     SharedModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true},
     AccountService
   ],
   bootstrap: [AppComponent]

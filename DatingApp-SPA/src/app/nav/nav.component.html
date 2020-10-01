@@ -13,6 +13,10 @@
           <a class="nav-link" routerLink="/messagess"  tabindex="-1" aria-disabled="true">Messagess</a>
         </li>
       </ng-container> 
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/errors" routerLinkActive="active">Erros </a>
+      </li>
+      
     </ul>
   </div>
   <div class="dropdown" *ngIf="(accountSerivce.currentUser$ | async) as user" dropdown>

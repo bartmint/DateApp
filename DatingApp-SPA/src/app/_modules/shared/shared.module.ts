@@ -9,7 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right' //wyswietla powiadomienia o np zlych danych wprowadzonych przy rejestracji
+      positionClass: 'toast-bottom-right' // wyswietla powiadomienia o np zlych danych wprowadzonych przy rejestracji
     })
   ],
   exports: [
