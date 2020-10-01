@@ -13,6 +13,7 @@ namespace DateApp.Infrastructure
         {
             service.AddScoped<IAccountRepository, AccountRepository>();
             service.AddScoped<ITokenRepository, TokenRepository>();
+            service.AddTransient<IUserRepository, UserRepository>();
             return service;
         }
     }

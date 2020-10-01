@@ -1,4 +1,5 @@
 ﻿using DateApp.Domain.Models;
+using DateApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,13 @@ namespace DateApp.Infrastructure
         
         public DbSet<Value> Values { get; set; }
         public DbSet<AppUser> Users{ get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
 
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed(); //wymagana migracja
+        }
 
 
     }

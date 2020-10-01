@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DateApp.Domain;
 using DateApp.Infrastructure;
 using DateApp.UI.Extensions;
+using DateApp.UI.Helpers;
 using DateApp.UI.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +43,7 @@ namespace DateApp
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(Configuration);
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

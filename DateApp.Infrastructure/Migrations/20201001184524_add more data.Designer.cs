@@ -3,14 +3,16 @@ using System;
 using DateApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DateApp.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201001184524_add more data")]
+    partial class addmoredata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +81,9 @@ namespace DateApp.Infrastructure.Migrations
                             KnownAs = "Lisa",
                             LastActive = new DateTime(2020, 6, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LookingFor = "Dolor anim cupidatat occaecat aliquip et Lorem ut elit fugiat. Mollit eu pariatur est sunt. Minim fugiat sit do dolore eu elit ex do id sunt. Qui fugiat nostrud occaecat nisi est dolor qui fugiat laborum cillum. Occaecat consequat ex mollit commodo ad irure cillum nulla velit ex pariatur veniam cupidatat. Officia veniam officia non deserunt mollit.\r\n",
-                            PasswordHash = new byte[] { 101, 147, 56, 22, 119, 38, 182, 167, 147, 143, 143, 231, 42, 224, 43, 136, 203, 107, 177, 96, 60, 206, 194, 26, 119, 131, 84, 250, 172, 241, 196, 178, 204, 149, 58, 74, 106, 218, 148, 136, 35, 140, 128, 48, 227, 23, 126, 44, 140, 6, 23, 161, 235, 224, 90, 210, 235, 60, 250, 69, 80, 38, 27, 41 },
-                            PasswordSalt = new byte[] { 151, 169, 183, 47, 170, 121, 81, 194, 189, 92, 253, 90, 201, 211, 43, 59, 133, 91, 60, 207, 188, 59, 62, 37, 88, 14, 229, 128, 224, 164, 98, 137, 69, 106, 58, 191, 247, 156, 50, 11, 129, 108, 13, 35, 197, 24, 212, 250, 18, 109, 191, 146, 104, 238, 166, 226, 105, 252, 242, 247, 135, 74, 72, 127, 205, 103, 7, 160, 153, 12, 9, 232, 201, 215, 117, 131, 141, 160, 171, 181, 94, 205, 3, 179, 212, 191, 179, 145, 236, 166, 230, 76, 66, 226, 23, 43, 203, 26, 182, 59, 173, 241, 224, 38, 59, 250, 225, 165, 234, 113, 178, 154, 81, 176, 37, 124, 231, 205, 151, 92, 225, 212, 203, 254, 238, 124, 154, 21 },
-                            Username = "lisa"
+                            PasswordHash = new byte[] { 10, 181, 236, 237, 185, 109, 39, 111, 197, 139, 101, 128, 46, 187, 6, 67, 252, 66, 87, 18, 17, 172, 31, 28, 45, 166, 87, 118, 128, 207, 21, 190, 251, 156, 58, 186, 24, 206, 211, 41, 182, 122, 74, 106, 19, 29, 109, 212, 170, 212, 216, 96, 14, 217, 27, 139, 54, 233, 241, 127, 63, 216, 109, 126 },
+                            PasswordSalt = new byte[] { 164, 54, 194, 236, 177, 95, 244, 85, 192, 9, 204, 204, 110, 83, 169, 145, 146, 244, 75, 166, 161, 244, 189, 175, 12, 160, 252, 253, 29, 66, 41, 1, 82, 4, 173, 10, 127, 56, 123, 252, 10, 31, 39, 149, 243, 140, 183, 150, 33, 157, 210, 140, 102, 138, 31, 223, 142, 44, 34, 139, 200, 76, 190, 96, 234, 135, 20, 120, 51, 86, 70, 2, 38, 253, 145, 247, 252, 118, 235, 188, 239, 183, 137, 186, 181, 199, 185, 151, 249, 142, 191, 153, 155, 234, 242, 36, 230, 159, 234, 64, 43, 103, 167, 218, 204, 96, 43, 90, 89, 0, 81, 18, 174, 208, 65, 252, 93, 11, 164, 114, 173, 73, 220, 70, 166, 181, 252, 30 },
+                            Username = "Lisa"
                         },
                         new
                         {
@@ -93,12 +95,12 @@ namespace DateApp.Infrastructure.Migrations
                             Gender = "Male",
                             Interests = "Sit sit incididunt proident velit.",
                             Introduction = "Sunt esse aliqua ullamco in incididunt consequat commodo. Nisi ad esse elit ipsum commodo fugiat est ad. Incididunt nostrud incididunt nostrud sit excepteur occaecat.\r\n",
-                            KnownAs = "martinoo",
+                            KnownAs = "Lisa",
                             LastActive = new DateTime(2020, 6, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LookingFor = "Dolor anim cupidatat occaecat aliquip et Lorem ut elit fugiat. Mollit eu pariatur est sunt. Minim fugiat sit do dolore eu elit ex do id sunt. Qui fugiat nostrud occaecat nisi est dolor qui fugiat laborum cillum. Occaecat consequat ex mollit commodo ad irure cillum nulla velit ex pariatur veniam cupidatat. Officia veniam officia non deserunt mollit.\r\n",
-                            PasswordHash = new byte[] { 101, 147, 56, 22, 119, 38, 182, 167, 147, 143, 143, 231, 42, 224, 43, 136, 203, 107, 177, 96, 60, 206, 194, 26, 119, 131, 84, 250, 172, 241, 196, 178, 204, 149, 58, 74, 106, 218, 148, 136, 35, 140, 128, 48, 227, 23, 126, 44, 140, 6, 23, 161, 235, 224, 90, 210, 235, 60, 250, 69, 80, 38, 27, 41 },
-                            PasswordSalt = new byte[] { 151, 169, 183, 47, 170, 121, 81, 194, 189, 92, 253, 90, 201, 211, 43, 59, 133, 91, 60, 207, 188, 59, 62, 37, 88, 14, 229, 128, 224, 164, 98, 137, 69, 106, 58, 191, 247, 156, 50, 11, 129, 108, 13, 35, 197, 24, 212, 250, 18, 109, 191, 146, 104, 238, 166, 226, 105, 252, 242, 247, 135, 74, 72, 127, 205, 103, 7, 160, 153, 12, 9, 232, 201, 215, 117, 131, 141, 160, 171, 181, 94, 205, 3, 179, 212, 191, 179, 145, 236, 166, 230, 76, 66, 226, 23, 43, 203, 26, 182, 59, 173, 241, 224, 38, 59, 250, 225, 165, 234, 113, 178, 154, 81, 176, 37, 124, 231, 205, 151, 92, 225, 212, 203, 254, 238, 124, 154, 21 },
-                            Username = "martin"
+                            PasswordHash = new byte[] { 10, 181, 236, 237, 185, 109, 39, 111, 197, 139, 101, 128, 46, 187, 6, 67, 252, 66, 87, 18, 17, 172, 31, 28, 45, 166, 87, 118, 128, 207, 21, 190, 251, 156, 58, 186, 24, 206, 211, 41, 182, 122, 74, 106, 19, 29, 109, 212, 170, 212, 216, 96, 14, 217, 27, 139, 54, 233, 241, 127, 63, 216, 109, 126 },
+                            PasswordSalt = new byte[] { 164, 54, 194, 236, 177, 95, 244, 85, 192, 9, 204, 204, 110, 83, 169, 145, 146, 244, 75, 166, 161, 244, 189, 175, 12, 160, 252, 253, 29, 66, 41, 1, 82, 4, 173, 10, 127, 56, 123, 252, 10, 31, 39, 149, 243, 140, 183, 150, 33, 157, 210, 140, 102, 138, 31, 223, 142, 44, 34, 139, 200, 76, 190, 96, 234, 135, 20, 120, 51, 86, 70, 2, 38, 253, 145, 247, 252, 118, 235, 188, 239, 183, 137, 186, 181, 199, 185, 151, 249, 142, 191, 153, 155, 234, 242, 36, 230, 159, 234, 64, 43, 103, 167, 218, 204, 96, 43, 90, 89, 0, 81, 18, 174, 208, 65, 252, 93, 11, 164, 114, 173, 73, 220, 70, 166, 181, 252, 30 },
+                            Username = "Martin"
                         },
                         new
                         {
@@ -110,12 +112,12 @@ namespace DateApp.Infrastructure.Migrations
                             Gender = "male",
                             Interests = "Sit sit incididunt proident velit.",
                             Introduction = "Sunt esse aliqua ullamco in incididunt consequat commodo. Nisi ad esse elit ipsum commodo fugiat est ad. Incididunt nostrud incididunt nostrud sit excepteur occaecat.\r\n",
-                            KnownAs = "barteko",
+                            KnownAs = "Lisa",
                             LastActive = new DateTime(2020, 6, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LookingFor = "Dolor anim cupidatat occaecat aliquip et Lorem ut elit fugiat. Mollit eu pariatur est sunt. Minim fugiat sit do dolore eu elit ex do id sunt. Qui fugiat nostrud occaecat nisi est dolor qui fugiat laborum cillum. Occaecat consequat ex mollit commodo ad irure cillum nulla velit ex pariatur veniam cupidatat. Officia veniam officia non deserunt mollit.\r\n",
-                            PasswordHash = new byte[] { 101, 147, 56, 22, 119, 38, 182, 167, 147, 143, 143, 231, 42, 224, 43, 136, 203, 107, 177, 96, 60, 206, 194, 26, 119, 131, 84, 250, 172, 241, 196, 178, 204, 149, 58, 74, 106, 218, 148, 136, 35, 140, 128, 48, 227, 23, 126, 44, 140, 6, 23, 161, 235, 224, 90, 210, 235, 60, 250, 69, 80, 38, 27, 41 },
-                            PasswordSalt = new byte[] { 151, 169, 183, 47, 170, 121, 81, 194, 189, 92, 253, 90, 201, 211, 43, 59, 133, 91, 60, 207, 188, 59, 62, 37, 88, 14, 229, 128, 224, 164, 98, 137, 69, 106, 58, 191, 247, 156, 50, 11, 129, 108, 13, 35, 197, 24, 212, 250, 18, 109, 191, 146, 104, 238, 166, 226, 105, 252, 242, 247, 135, 74, 72, 127, 205, 103, 7, 160, 153, 12, 9, 232, 201, 215, 117, 131, 141, 160, 171, 181, 94, 205, 3, 179, 212, 191, 179, 145, 236, 166, 230, 76, 66, 226, 23, 43, 203, 26, 182, 59, 173, 241, 224, 38, 59, 250, 225, 165, 234, 113, 178, 154, 81, 176, 37, 124, 231, 205, 151, 92, 225, 212, 203, 254, 238, 124, 154, 21 },
-                            Username = "bartek"
+                            PasswordHash = new byte[] { 10, 181, 236, 237, 185, 109, 39, 111, 197, 139, 101, 128, 46, 187, 6, 67, 252, 66, 87, 18, 17, 172, 31, 28, 45, 166, 87, 118, 128, 207, 21, 190, 251, 156, 58, 186, 24, 206, 211, 41, 182, 122, 74, 106, 19, 29, 109, 212, 170, 212, 216, 96, 14, 217, 27, 139, 54, 233, 241, 127, 63, 216, 109, 126 },
+                            PasswordSalt = new byte[] { 164, 54, 194, 236, 177, 95, 244, 85, 192, 9, 204, 204, 110, 83, 169, 145, 146, 244, 75, 166, 161, 244, 189, 175, 12, 160, 252, 253, 29, 66, 41, 1, 82, 4, 173, 10, 127, 56, 123, 252, 10, 31, 39, 149, 243, 140, 183, 150, 33, 157, 210, 140, 102, 138, 31, 223, 142, 44, 34, 139, 200, 76, 190, 96, 234, 135, 20, 120, 51, 86, 70, 2, 38, 253, 145, 247, 252, 118, 235, 188, 239, 183, 137, 186, 181, 199, 185, 151, 249, 142, 191, 153, 155, 234, 242, 36, 230, 159, 234, 64, 43, 103, 167, 218, 204, 96, 43, 90, 89, 0, 81, 18, 174, 208, 65, 252, 93, 11, 164, 114, 173, 73, 220, 70, 166, 181, 252, 30 },
+                            Username = "Bartek"
                         });
                 });
 
