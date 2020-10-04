@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   // tslint:disable-next-line: max-line-length
   providedIn: 'root' // serwis jest rejestrowany jako dostawca modulu, bez dodawania go do dostawcow w app.module.ts ngModules, dodawany jest do providers
 })
 export class AccountService {
- baseUrl =  'http://localhost:5001/api/';
+ baseUrl =  environment.apiUrl;
  private currentUserSource = new ReplaySubject<User>(1);
  currentUser$ = this.currentUserSource.asObservable();
 

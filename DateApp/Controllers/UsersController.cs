@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using DateApp.Domain.Abstract;
-using DateApp.Domain.Models;
-using DateApp.Infrastructure;
+using System.Linq;
 using DateApp.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using AutoMapper.QueryableExtensions;
 
 namespace DatingApp.API.Controllers
 {
@@ -43,30 +40,11 @@ namespace DatingApp.API.Controllers
             return Ok(userToReturn);
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberVm>>> GetUsers()
+        public ActionResult<IEnumerable<MemberVm>> GetUsers()
         {
-            var users = await _userRepository.GetUsersAsync();
-
-            var usersToReturn = _mapper.Map<IEnumerable<MemberVm>>(users);
+            var usersToReturn = _userRepository.GetUsersAsync().ProjectTo<MemberVm>(_mapper.ConfigurationProvider);
             return Ok(usersToReturn);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

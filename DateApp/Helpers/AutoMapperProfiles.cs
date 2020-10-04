@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DateApp.Domain.Extensions;
 using DateApp.Domain.Models;
 using DateApp.UI.Models.ViewModels;
 using System;
@@ -13,7 +14,8 @@ namespace DateApp.UI.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, MemberVm>()
-                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoVm>();
 
         }

@@ -3,6 +3,7 @@ using DateApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,11 +29,11 @@ namespace DateApp.Infrastructure.Repositories
                 .FirstOrDefaultAsync(i => i.Username == username);
         }
 
-        public async Task<IEnumerable<AppUser>> GetUsersAsync()
+        public IQueryable<AppUser> GetUsersAsync()
         {
-            return await _ctx.Users
-                .Include(p=>p.Photos)
-                .ToListAsync();
+            return _ctx.Users;
+                //.Include(p => p.Photos);
+               
         }
 
         public async Task<bool> SaveAllAsync()
