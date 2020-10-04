@@ -7,6 +7,8 @@ using DateApp.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper.QueryableExtensions;
+using DateApp.UI.Models.DTO;
+using System.Security.Claims;
 
 namespace DatingApp.API.Controllers
 {
@@ -44,6 +46,19 @@ namespace DatingApp.API.Controllers
         {
             var usersToReturn = _userRepository.GetUsersAsync().ProjectTo<MemberVm>(_mapper.ConfigurationProvider);
             return Ok(usersToReturn);
+        }
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //powinno zwrocic username z tokenu
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+
+            _mapper.Map(memberUpdateDto, user);
+
+            _userRepository.Update(user);
+            if (await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("failed to update user");
         }
 
     }

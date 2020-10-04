@@ -28,7 +28,7 @@ namespace DateApp.Infrastructure.Data
                     Interests = "Sit sit incididunt proident velit.",
                     City = "Greenbush",
                     Country = "Martinique",
-                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$sword")),
+                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("pa$$sword")),
                     PasswordSalt = hmac.Key,
                    
                 },
@@ -46,7 +46,7 @@ namespace DateApp.Infrastructure.Data
                     Interests = "Sit sit incididunt proident velit.",
                     City = "Greenbush",
                     Country = "Martinique",
-                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$sword")),
+                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("pa$$sword")),
                     PasswordSalt = hmac.Key
                 }, new AppUser
                 {
@@ -62,7 +62,7 @@ namespace DateApp.Infrastructure.Data
                     Interests = "Sit sit incididunt proident velit.",
                     City = "Greenbush",
                     Country = "Martinique",
-                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$sword")),
+                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("pa$$sword")),
                     PasswordSalt = hmac.Key
                 }
                 ) ;
