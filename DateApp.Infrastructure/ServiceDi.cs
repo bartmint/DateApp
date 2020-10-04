@@ -9,12 +9,13 @@ namespace DateApp.Infrastructure
 {
     public static class ServiceDi
     {
-        public static IServiceCollection AddRepositories(this IServiceCollection service)
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            service.AddScoped<IAccountRepository, AccountRepository>();
-            service.AddScoped<ITokenRepository, TokenRepository>();
-            service.AddTransient<IUserRepository, UserRepository>();
-            return service;
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IPhotoService, PhotoRepository>();
+            return services;
         }
     }
 }
