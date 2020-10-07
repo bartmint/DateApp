@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,15 @@ namespace DateApp.UI.Controllers
         private readonly IAccountRepository _authRepository;
         private readonly IConfiguration _configuration;
         private readonly ITokenRepository _tokenRepository;
+        private readonly IPhotoGet _photoGet;
 
-        public AccountController(IAccountRepository authRepository, IConfiguration configuration, ITokenRepository tokenRepository)
+        public AccountController(IAccountRepository authRepository,
+            IConfiguration configuration, ITokenRepository tokenRepository, IPhotoGet photoGet)
         {
             _authRepository = authRepository;
             _configuration = configuration;
             _tokenRepository = tokenRepository;
+            _photoGet = photoGet;
         }
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(UserForRegisterDtO userForRegister)
@@ -52,7 +56,8 @@ namespace DateApp.UI.Controllers
             var userDTO = new UserDTO
             {
                 Username = userForLogin.Username,
-                Token = _tokenRepository.CreateToken(new AppUser { Username = userForLogin.Username })
+                Token = _tokenRepository.CreateToken(new AppUser { Username = userForLogin.Username }),
+                PhotoUrl= await _photoGet.GetPhoto(userFromRepo.Id)
             };
             await _authRepository.Login(userDTO.Username, userForLogin.Password);
 

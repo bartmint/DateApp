@@ -15,6 +15,7 @@ namespace DateApp.Infrastructure
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPhotoService, PhotoRepository>();
+            services.AddTransient<IPhotoGet,PhotoRepository>();
             return services;
         }
     }
