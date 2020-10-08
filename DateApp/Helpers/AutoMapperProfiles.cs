@@ -3,6 +3,7 @@ using DateApp.Domain.Extensions;
 using DateApp.Domain.Models;
 using DateApp.UI.Models.DTO;
 using DateApp.UI.Models.ViewModels;
+using DateApp.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace DateApp.UI.Helpers
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoVm>();
             CreateMap<MemberUpdateDto, AppUser>();
+            CreateMap<UserForRegisterDtO, AppUser>();
 
         }
     }

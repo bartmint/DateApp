@@ -8,7 +8,8 @@ namespace DateApp.Domain.Abstract
 {
     public interface IAccountRepository
     {
-        Task<AppUser> Register(string username, string password);
+        Task<AppUser> Register(string username, string password,
+            string KnownAs, string Gender, DateTime DateOfBirth, string City, string Country);
         Task<AppUser> Login(string username, string password);
         Task<bool> UserExists(string username);
     }

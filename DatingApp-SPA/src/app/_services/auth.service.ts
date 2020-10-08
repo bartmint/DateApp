@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   // tslint:disable-next-line: max-line-length
   providedIn: 'root' // serwis jest rejestrowany jako dostawca modulu, bez dodawania go do dostawcow w app.module.ts ngModules, dodawany jest do providers
 })
-export class AccountService {
+ export class AccountService {
  baseUrl =  environment.apiUrl;
  private currentUserSource = new ReplaySubject<User>(1);
  currentUser$ = this.currentUserSource.asObservable();

@@ -43,7 +43,8 @@ namespace DateApp.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<AppUser> Register(string username, string password)
+        public async Task<AppUser> Register(string username, string password,
+            string knownAs, string gender, DateTime dateOfBirth, string city, string country)
         {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -52,7 +53,12 @@ namespace DateApp.Infrastructure.Repositories
             {
                 Username=username,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                KnownAs=knownAs,
+                Gender=gender,
+                DateOfBirth=dateOfBirth,
+                City=city,
+                Country=country
             };
 
             await _ctx.Users.AddAsync(user);

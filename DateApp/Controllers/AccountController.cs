@@ -1,4 +1,5 @@
-﻿using DateApp.Domain.Abstract;
+﻿using AutoMapper;
+using DateApp.Domain.Abstract;
 using DateApp.Domain.Models;
 using DateApp.UI.Models.DTO;
 using DateApp.UI.ViewModels;
@@ -16,14 +17,16 @@ namespace DateApp.UI.Controllers
 {
     public class AccountController : BaseApiController
     {
+        private readonly IMapper _automapper;
         private readonly IAccountRepository _authRepository;
         private readonly IConfiguration _configuration;
         private readonly ITokenRepository _tokenRepository;
         private readonly IPhotoGet _photoGet;
 
         public AccountController(IAccountRepository authRepository,
-            IConfiguration configuration, ITokenRepository tokenRepository, IPhotoGet photoGet)
+            IConfiguration configuration, ITokenRepository tokenRepository, IPhotoGet photoGet, IMapper automapper)
         {
+            _automapper = automapper;
             _authRepository = authRepository;
             _configuration = configuration;
             _tokenRepository = tokenRepository;
@@ -35,13 +38,17 @@ namespace DateApp.UI.Controllers
             userForRegister.Username = userForRegister.Username.ToLower();
             if (await _authRepository.UserExists(userForRegister.Username))
                 return BadRequest("User already exists");
+            var user = _automapper.Map<AppUser>(userForRegister);
+
+            await _authRepository.Register(userForRegister.Username, userForRegister.Password,
+            userForRegister.KnownAs, userForRegister.Gender, userForRegister.DateOfBirth, userForRegister.City, userForRegister.Country);
 
             var userDTO = new UserDTO
             {
                 Username = userForRegister.Username,
-                Token=_tokenRepository.CreateToken(new AppUser { Username=userForRegister.Username})
+                Token = _tokenRepository.CreateToken(new AppUser { Username = userForRegister.Username }),
+                KnownAs = user.KnownAs
             };
-            await _authRepository.Register(userDTO.Username, userForRegister.Password);
 
             return userDTO;
         }

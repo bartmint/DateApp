@@ -34,18 +34,13 @@ namespace DatingApp.API.Controllers
             
         }
  
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult> GetUsers(int id)
-        //{
-        //    return Ok(await _userRepository.GetUserByIdAsync(id));
-        //}
         [HttpGet("{username}", Name ="GetUser")]
         public async Task<ActionResult<MemberVm>> GetUser(string username)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
 
             var userToReturn = _mapper.Map<MemberVm>(user);
-
+            
             return Ok(userToReturn);
         }
         [HttpGet]
@@ -89,12 +84,8 @@ namespace DatingApp.API.Controllers
             user.Photos.Add(photo);
             if (await _userRepository.SaveAllAsync())
             {
-                //return _mapper.Map<PhotoVm>(photo);
                 return CreatedAtRoute("GetUser", new { username = user.Username } ,_mapper.Map<PhotoVm>(photo));
-                
             }
-
-
             return BadRequest("Problem adding photo");
 
         }
