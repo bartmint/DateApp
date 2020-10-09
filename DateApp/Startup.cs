@@ -44,6 +44,7 @@ namespace DateApp
             services.AddCors();
             services.AddIdentityServices(Configuration);
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddTransient<LogUserActivity>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

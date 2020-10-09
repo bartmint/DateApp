@@ -47,7 +47,8 @@ namespace DateApp.UI.Controllers
             {
                 Username = userForRegister.Username,
                 Token = _tokenRepository.CreateToken(new AppUser { Username = userForRegister.Username }),
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender=user.Gender
             };
 
             return userDTO;
@@ -64,7 +65,8 @@ namespace DateApp.UI.Controllers
             {
                 Username = userForLogin.Username,
                 Token = _tokenRepository.CreateToken(new AppUser { Username = userForLogin.Username }),
-                PhotoUrl= await _photoGet.GetPhoto(userFromRepo.Id)
+                PhotoUrl= await _photoGet.GetPhoto(userFromRepo.Id),
+                Gender=userFromRepo.Gender
             };
             await _authRepository.Login(userDTO.Username, userForLogin.Password);
 

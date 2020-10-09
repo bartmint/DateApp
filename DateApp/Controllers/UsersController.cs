@@ -12,14 +12,16 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using DateApp.UI.Extensions;
 using DateApp.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using DateApp.UI.Helpers;
+using System;
+using DateApp.UI.Controllers;
 
 namespace DatingApp.API.Controllers
 {
     //http:localhost:5000/api/values to oznacza
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    
+    public class UsersController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -44,10 +46,45 @@ namespace DatingApp.API.Controllers
             return Ok(userToReturn);
         }
         [HttpGet]
-        public ActionResult<IEnumerable<MemberVm>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberVm>>> GetUsers([FromQuery]UserParams userParams) //query jest pobierane z urla, ktory wpisujemy w postman
         {
-            var usersToReturn = _userRepository.GetUsersAsync().ProjectTo<MemberVm>(_mapper.ConfigurationProvider);
-            return Ok(usersToReturn);
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            if(user!=null)
+                userParams.CurrentUsername = user.Username;
+            
+            
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+            }
+
+            var users =
+                _userRepository.
+                GetUsersAsync();
+            
+            users = users.Where(u => u.Username != userParams.CurrentUsername);
+            users = users.Where(u => u.Gender == userParams.Gender);
+
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+            users = users.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+            users = userParams.OrderBy switch
+            {
+                "created" => users.OrderByDescending(u => u.Created),
+                _ => users.OrderByDescending(u => u.LastActive)
+            };
+
+            var usersToReturn=users.ProjectTo<MemberVm>(_mapper.ConfigurationProvider)
+            .AsNoTracking(); 
+
+
+            var items =await PagedList<MemberVm>.CreateAsync(usersToReturn, userParams.PageNumber, userParams.PageSize);
+
+            Response.AddPaginationHeader(items.CurrentPage, items.PageSize, items.TotalCount, items.TotalPages);
+
+            return Ok(items);
         }
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)

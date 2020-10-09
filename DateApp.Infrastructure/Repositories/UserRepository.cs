@@ -28,12 +28,9 @@ namespace DateApp.Infrastructure.Repositories
                 .Include(p=>p.Photos)
                 .FirstOrDefaultAsync(i => i.Username == username);
         }
-
         public IQueryable<AppUser> GetUsersAsync()
         {
             return _ctx.Users;
-                //.Include(p => p.Photos);
-               
         }
 
         public async Task<bool> SaveAllAsync()

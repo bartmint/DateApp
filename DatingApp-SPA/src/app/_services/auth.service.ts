@@ -4,10 +4,9 @@ import {map} from 'rxjs/operators';
 import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+
 
 @Injectable({
-  // tslint:disable-next-line: max-line-length
   providedIn: 'root' // serwis jest rejestrowany jako dostawca modulu, bez dodawania go do dostawcow w app.module.ts ngModules, dodawany jest do providers
 })
  export class AccountService {
@@ -16,7 +15,7 @@ import { Router } from '@angular/router';
  currentUser$ = this.currentUserSource.asObservable();
 
 
-constructor(private http: HttpClient, private router: Router) { }
+constructor(private http: HttpClient) { }
 
 
 // tslint:disable-next-line: typedef

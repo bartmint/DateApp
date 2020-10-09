@@ -27,7 +27,15 @@ namespace DateApp.UI.Extensions
                         ValidateIssuer = false,
                         ValidateAudience = false,
                     };
-                });
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            context.Token = context.Request.Cookies["JWT-Validation"];
+                            return Task.CompletedTask;
+                        }
+                    };
+                }).AddCookie();
             return services;
         }
     }
