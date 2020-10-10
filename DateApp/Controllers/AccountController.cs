@@ -40,13 +40,13 @@ namespace DateApp.UI.Controllers
                 return BadRequest("User already exists");
             var user = _automapper.Map<AppUser>(userForRegister);
 
-            await _authRepository.Register(userForRegister.Username, userForRegister.Password,
+            var registeredUser=await _authRepository.Register(userForRegister.Username, userForRegister.Password,
             userForRegister.KnownAs, userForRegister.Gender, userForRegister.DateOfBirth, userForRegister.City, userForRegister.Country);
 
             var userDTO = new UserDTO
             {
                 Username = userForRegister.Username,
-                Token = _tokenRepository.CreateToken(new AppUser { Username = userForRegister.Username }),
+                Token = _tokenRepository.CreateToken(registeredUser), //za duzy obiekt do przesylania
                 KnownAs = user.KnownAs,
                 Gender=user.Gender
             };
@@ -64,7 +64,7 @@ namespace DateApp.UI.Controllers
             var userDTO = new UserDTO
             {
                 Username = userForLogin.Username,
-                Token = _tokenRepository.CreateToken(new AppUser { Username = userForLogin.Username }),
+                Token = _tokenRepository.CreateToken(userFromRepo),
                 PhotoUrl= await _photoGet.GetPhoto(userFromRepo.Id),
                 Gender=userFromRepo.Gender
             };

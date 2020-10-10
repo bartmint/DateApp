@@ -22,7 +22,8 @@ namespace DateApp.Infrastructure.Repositories
         {
             var claims = new List<Claim>//rozszczenia
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.Username)
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.Username)
             };
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);//poswiadczenie
             var tokenDescriptor = new SecurityTokenDescriptor

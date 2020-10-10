@@ -48,7 +48,7 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberVm>>> GetUsers([FromQuery]UserParams userParams) //query jest pobierane z urla, ktory wpisujemy w postman
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _userRepository.GetUserByIdAsync(User.GetUserId());
 
             if(user!=null)
                 userParams.CurrentUsername = user.Username;

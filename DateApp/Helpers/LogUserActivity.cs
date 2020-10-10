@@ -17,9 +17,9 @@ namespace DateApp.UI.Helpers
 
             if (!resultcontext.HttpContext.User.Identity.IsAuthenticated) return;
 
-            var username = resultcontext.HttpContext.User.GetUsername();
+            var userid = resultcontext.HttpContext.User.GetUserId();
             var repo = resultcontext.HttpContext.RequestServices.GetService<IUserRepository>();
-            var user = await repo.GetUserByUsernameAsync(username);
+            var user = await repo.GetUserByIdAsync(userid);
             user.LastActive = DateTime.Now;
             await repo.SaveAllAsync();
 
