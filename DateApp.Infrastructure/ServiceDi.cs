@@ -16,6 +16,7 @@ namespace DateApp.Infrastructure
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPhotoService, PhotoRepository>();
             services.AddTransient<IPhotoGet,PhotoRepository>();
+            services.AddTransient<ILikesRepository, LikesRepository>();
             return services;
         }
     }

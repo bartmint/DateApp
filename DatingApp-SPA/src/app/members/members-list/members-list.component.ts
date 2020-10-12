@@ -22,8 +22,8 @@ export class MembersListComponent implements OnInit {
 
 
   constructor(private memberService: MembersService) {
-    this.userParams=this.memberService.getUserParams();
-    
+    this.userParams = this.memberService.getUserParams();
+
    }
 
   ngOnInit() {
@@ -45,7 +45,4 @@ this.loadMembers();
 resetFilter(){
   this.userParams = this.memberService.resetUserParams();
   this.loadMembers();
-}
-
-
-}
+}}

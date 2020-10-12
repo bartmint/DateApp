@@ -8,8 +8,15 @@ import { MembersService } from '../_services/members.service';
   styleUrls: ['./lists.component.scss']
 })
 export class ListsComponent implements OnInit {
+  members: Partial<Member[]>;
+  predicate = 'liked';
+  constructor(private memberService: MembersService){}
 
-  constructor(){}
+  ngOnInit(): void{this.loadLikes(); }
 
-  ngOnInit(): void{}
+  loadLikes(){
+    this.memberService.getLikes(this.predicate).subscribe(response => {
+      this.members = response;
+    });
+  }
 }
