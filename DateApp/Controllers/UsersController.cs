@@ -35,7 +35,6 @@ namespace DatingApp.API.Controllers
             _photoService = photoService;
             
         }
- 
         [HttpGet("{username}", Name ="GetUser")]
         public async Task<ActionResult<MemberVm>> GetUser(string username)
         {
@@ -51,7 +50,7 @@ namespace DatingApp.API.Controllers
             var user = await _userRepository.GetUserByIdAsync(User.GetUserId());
 
             if(user!=null)
-                userParams.CurrentUsername = user.Username;
+                userParams.CurrentUsername = user.UserName;
             
             
             if (string.IsNullOrEmpty(userParams.Gender))
@@ -63,7 +62,7 @@ namespace DatingApp.API.Controllers
                 _userRepository.
                 GetUsersAsync();
             
-            users = users.Where(u => u.Username != userParams.CurrentUsername);
+            users = users.Where(u => u.UserName != userParams.CurrentUsername);
             users = users.Where(u => u.Gender == userParams.Gender);
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
@@ -121,7 +120,7 @@ namespace DatingApp.API.Controllers
             user.Photos.Add(photo);
             if (await _userRepository.SaveAllAsync())
             {
-                return CreatedAtRoute("GetUser", new { username = user.Username } ,_mapper.Map<PhotoVm>(photo));
+                return CreatedAtRoute("GetUser", new { username = user.UserName } ,_mapper.Map<PhotoVm>(photo));
             }
             return BadRequest("Problem adding photo");
 

@@ -19,13 +19,13 @@ namespace DateApp.Infrastructure.Repositories
         }
         public async Task<AppUser> Login(string username, string password)
         {
-            var user = await _ctx.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _ctx.Users.FirstOrDefaultAsync(u => u.UserName == username);
 
             if (user is null) 
                 return null;
 
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
+            //if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            //    return null;
 
             return user;
         }
@@ -51,9 +51,7 @@ namespace DateApp.Infrastructure.Repositories
 
             var user = new AppUser
             {
-                Username=username,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
+                UserName = username,
                 KnownAs=knownAs,
                 Gender=gender,
                 DateOfBirth=dateOfBirth,
@@ -76,7 +74,7 @@ namespace DateApp.Infrastructure.Repositories
 
         public async Task<bool> UserExists(string username)
         {
-            if (await _ctx.Users.AnyAsync(u => u.Username == username))
+            if (await _ctx.Users.AnyAsync(u => u.UserName == username))
                 return true;
 
             return false;

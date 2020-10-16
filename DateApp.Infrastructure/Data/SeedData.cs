@@ -7,9 +7,9 @@ using System.Text;
 
 namespace DateApp.Infrastructure.Data
 {
-    public static class SeedData
+    public static class SeedU
     {
-        public static void Seed(this ModelBuilder modelbuilder)
+        public static void SeedUsers(this ModelBuilder modelbuilder)
         {
             var hmac = new HMACSHA512();
             modelbuilder.Entity<AppUser>().HasData
@@ -17,7 +17,7 @@ namespace DateApp.Infrastructure.Data
                 new AppUser
                 {
                     Id = 12,
-                    Username = "lisa",
+                    UserName = "lisa",
                     Gender = "female",
                     DateOfBirth = Convert.ToDateTime("1956-07-22"),
                     KnownAs = "Lisa",
@@ -28,14 +28,11 @@ namespace DateApp.Infrastructure.Data
                     Interests = "Sit sit incididunt proident velit.",
                     City = "Greenbush",
                     Country = "Martinique",
-                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("pa$$sword")),
-                    PasswordSalt = hmac.Key,
-                   
                 },
                 new AppUser
                 {
                     Id = 13,
-                    Username = "martin",
+                    UserName = "Admin",
                     Gender = "Male",
                     DateOfBirth = Convert.ToDateTime("1956-07-22"),
                     KnownAs = "martinoo",
@@ -46,12 +43,12 @@ namespace DateApp.Infrastructure.Data
                     Interests = "Sit sit incididunt proident velit.",
                     City = "Greenbush",
                     Country = "Martinique",
-                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("pa$$sword")),
-                    PasswordSalt = hmac.Key
+                    PasswordHash="Admin1"
+                    
                 }, new AppUser
                 {
                     Id = 14,
-                    Username = "bartek",
+                    UserName = "bartek",
                     Gender = "male",
                     DateOfBirth = Convert.ToDateTime("1956-07-22"),
                     KnownAs = "barteko",
@@ -62,8 +59,6 @@ namespace DateApp.Infrastructure.Data
                     Interests = "Sit sit incididunt proident velit.",
                     City = "Greenbush",
                     Country = "Martinique",
-                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("pa$$sword")),
-                    PasswordSalt = hmac.Key
                 }
                 ) ;
             modelbuilder.Entity<Photo>().HasData(
@@ -71,6 +66,7 @@ namespace DateApp.Infrastructure.Data
                 new Photo { Url = "https://randomuser.me/api/portraits/women/50.jpg", IsMain = true, AppUserId=13, Id=13, PublicId = "5" },
                 new Photo { Url = "https://randomuser.me/api/portraits/women/52.jpg", IsMain = true, AppUserId=14, Id=14, PublicId = "5" }
                 );
+            
         }
     }
 }

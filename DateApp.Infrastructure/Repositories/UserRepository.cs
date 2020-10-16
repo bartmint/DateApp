@@ -26,7 +26,7 @@ namespace DateApp.Infrastructure.Repositories
         {
             return await _ctx.Users
                 .Include(p=>p.Photos)
-                .FirstOrDefaultAsync(i => i.Username == username);
+                .FirstOrDefaultAsync(i => i.UserName == username);
         }
         public IQueryable<AppUser> GetUsersAsync()
         {

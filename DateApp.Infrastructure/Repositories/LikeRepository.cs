@@ -26,7 +26,7 @@ namespace DateApp.Infrastructure.Repositories
 
         public async Task<IEnumerable<LikeDto>> GetUserLikes(string predicate, int userId)
         {
-            var users = _ctx.Users.OrderBy(u => u.Username).AsQueryable();
+            var users = _ctx.Users.OrderBy(u => u.UserName).AsQueryable();
             var likes = _ctx.Likes.AsQueryable();
 
             if (predicate == "liked")
@@ -41,7 +41,7 @@ namespace DateApp.Infrastructure.Repositories
             }
             return await users.Select(user => new LikeDto
             {
-                Username=user.Username,
+                Username=user.UserName,
                 KnownAs=user.KnownAs,
                 Age=user.DateOfBirth.CalculateAge(),
                 PhotoUrl=user.Photos.FirstOrDefault(p=>p.IsMain).Url,

@@ -43,9 +43,9 @@ namespace DateApp.Infrastructure.Repositories
 
             query = container switch
             {
-                "Inbox" => query.Where(u => u.Recipient.Username == username && u.RecipientDeleted==false),
-                "Outbox" => query.Where(u => u.Sender.Username == username && u.SenderDeleted == false),
-                _ => query.Where(u => u.Recipient.Username == username && u.RecipientDeleted==false && u.DateRead == null)
+                "Inbox" => query.Where(u => u.Recipient.UserName == username && u.RecipientDeleted==false),
+                "Outbox" => query.Where(u => u.Sender.UserName == username && u.SenderDeleted == false),
+                _ => query.Where(u => u.Recipient.UserName == username && u.RecipientDeleted==false && u.DateRead == null)
             };
             return query;
         }
@@ -57,14 +57,14 @@ namespace DateApp.Infrastructure.Repositories
             var messages =await _ctx.Messages
                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
-                .Where(m => m.Recipient.Username == currentUsername && m.RecipientDeleted==false
-                && m.Sender.Username == recipientUsername
-                || m.Recipient.Username == recipientUsername
-                && m.Sender.Username == currentUsername && m.SenderDeleted==false)
+                .Where(m => m.Recipient.UserName == currentUsername && m.RecipientDeleted==false
+                && m.Sender.UserName == recipientUsername
+                || m.Recipient.UserName == recipientUsername
+                && m.Sender.UserName == currentUsername && m.SenderDeleted==false)
                 .OrderBy(m => m.Messagesent)
                 .ToListAsync();
 
-            var unreadMessages =  messages.Where(m => m.DateRead == null && m.Recipient.Username == currentUsername);
+            var unreadMessages =  messages.Where(m => m.DateRead == null && m.Recipient.UserName == currentUsername);
             if (unreadMessages.Any())
             {
                 foreach (var message in unreadMessages)

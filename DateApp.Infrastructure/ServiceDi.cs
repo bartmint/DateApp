@@ -1,5 +1,6 @@
-﻿using DateApp.Domain.Abstract;
-using DateApp.Infrastructure.Migrations;
+﻿using DateApp.Domain;
+using DateApp.Domain.Abstract;
+using DateApp.Infrastructure.Data;
 using DateApp.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,6 +20,8 @@ namespace DateApp.Infrastructure
             services.AddTransient<IPhotoGet,PhotoRepository>();
             services.AddTransient<ILikesRepository, LikesRepository>();
             services.AddTransient<IMessageRepository, MessageRepository>();
+
+
             return services;
         }
     }
