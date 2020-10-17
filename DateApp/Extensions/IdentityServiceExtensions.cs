@@ -1,6 +1,7 @@
 ﻿using DateApp.Domain.Models;
 using DateApp.Infrastructure;
 using DateApp.UI.Helpers;
+using DateApp.UI.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -45,11 +46,26 @@ namespace DateApp.UI.Extensions
                     {
                         OnMessageReceived = context =>
                         {
-                            context.Token = context.Request.Cookies["JWT-Validation"];
+                            var accessToken = context.Request.Query["access_token"];
+
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                            {
+                                context.Token = accessToken;
+                            }
                             return Task.CompletedTask;
                         }
                     };
-                }).AddCookie();
+                });
+                //    options.Events = new JwtBearerEvents
+                //    {
+                //        OnMessageReceived = context =>
+                //        {
+                //            context.Token = context.Request.Cookies["JWT-Validation"];
+                //            return Task.CompletedTask;
+                //        }
+                //    };
+                //}).AddCookie();
 
             services.AddAuthorization(options =>
             {
@@ -57,7 +73,7 @@ namespace DateApp.UI.Extensions
                 options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Moderator", "Admin"));
             });
 
-
+            services.AddSingleton<PresenceTracker>();
             return services;
         }
     }

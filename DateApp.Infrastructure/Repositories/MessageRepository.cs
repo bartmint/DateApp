@@ -17,6 +17,12 @@ namespace DateApp.Infrastructure.Repositories
         {
             _ctx = appDbContext;
         }
+
+        public void AddGroup(Group group)
+        {
+            _ctx.Groups.Add(group);
+        }
+
         public void AddMessage(Message message)
         {
             _ctx.Messages.Add(message);
@@ -27,12 +33,24 @@ namespace DateApp.Infrastructure.Repositories
             _ctx.Messages.Remove(message);
         }
 
+        public async Task<Connection> GetConnection(string connectionId)
+        {
+            return await _ctx.Connection.FindAsync(connectionId);
+        }
+
         public async Task<Message> GetMessage(int id)
         {
             return await _ctx.Messages
                 .Include(u => u.Sender)
                 .Include(p => p.Recipient)
                 .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async  Task<Group> GetMessageGroup(string groupName)
+        {
+            return await _ctx.Groups
+                 .Include(x => x.Connections)
+                 .FirstOrDefaultAsync(x => x.Name == groupName);
         }
 
         public IQueryable<Message> GetMessagesForUser(string container, string username)
@@ -75,6 +93,11 @@ namespace DateApp.Infrastructure.Repositories
             }
             return messages;
 
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            _ctx.Connection.Remove(connection);
         }
 
         public async Task<bool> SaveAllAsync()

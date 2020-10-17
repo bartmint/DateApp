@@ -9,6 +9,7 @@ using DateApp.Infrastructure;
 using DateApp.UI.Extensions;
 using DateApp.UI.Helpers;
 using DateApp.UI.Middleware;
+using DateApp.UI.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,7 @@ namespace DateApp
             services.AddIdentityServices(Configuration);
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddTransient<LogUserActivity>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +58,7 @@ namespace DateApp
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCors(x=>x.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200"));
+            app.UseCors(x=>x.AllowAnyMethod().AllowCredentials().AllowAnyHeader().WithOrigins("http://localhost:4200"));
             app.UseAuthentication();
             app.UseAuthorization();
             
@@ -64,6 +66,8 @@ namespace DateApp
             {
                 //endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

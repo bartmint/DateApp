@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PresenceService } from './presence.service';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environment';
  currentUser$ = this.currentUserSource.asObservable();
 
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private presence: PresenceService) { }
 
 
 // tslint:disable-next-line: typedef
@@ -24,6 +25,7 @@ login(model: any) {
     map((user: User) => {
       if (user){
         this.setCurrentUser(user);
+        this.presence.createHubConnection(user);
       }
     })
   );
@@ -34,6 +36,7 @@ register(model: any){
     map((user: User) => {
       if (user) {
         this.setCurrentUser(user);
+        this.presence.createHubConnection(user);
       }
       return user; // tylko do wyswietlenia w konsoli
     })
@@ -44,6 +47,7 @@ register(model: any){
 logout(){
   localStorage.removeItem('user');
   this.currentUserSource.next(null);
+  this.presence.stopHubConnection();
 }
 
 // tslint:disable-next-line: typedef
