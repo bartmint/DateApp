@@ -1,4 +1,4 @@
-# This is Date app based on udemy course. Backend is made in asp net core using repository pattern. Client Application is SPA.
+#  Backend is made in asp net core using repository pattern. Client Application is SPA.
 ## Technologies
 - ASP NET CORE WEB API
 - ANGULAR 10
